@@ -29,11 +29,15 @@ void initDMA(void);
 void initCANFilter(void);
 void exchangeOrderData(void);
 void test(void);
+void initTimer1(void);
 
 /*  変数    */
 OrderMotVel order;
 unsigned int ecan1txmsgBuf[NUM_OF_ECAN_BUFS][8] __attribute__((space(xmemory)));
 unsigned int ecan1rxmsgBuf[NUM_OF_ECAN_BUFS][8] __attribute__((space(xmemory)));
+static short checkRXCounter = 0;
+static short checkRXCounter_last = 0;
+static char count = 0;
 
 
 void initCAN(void)
@@ -90,7 +94,7 @@ void initCAN(void)
        RB1 = 0b0
        RB0 = 0b0
        DLC = 0b1111 */
-    ecan1txmsgBuf[0][2] = 0x0002;
+    ecan1txmsgBuf[0][2] = 0x0004;
 /* Write message data bytes */
     ecan1txmsgBuf[0][3] = 0xab0d;
 //    ecan1msgBuf[0][4] = 0xabcd;
@@ -102,6 +106,7 @@ void initCAN(void)
 //    C1TR01CONbits.TXREQ0 = 1;
 
     initCANINT();
+    initTimer1();
 
     TRISBbits.TRISB6 = 1;
     RPINR26 = 0;
@@ -192,16 +197,7 @@ void initCANINT(void)
     C1INTEbits.RBIE = 1;
 
     /* 割り込み優先度設定 */
-    IPC8bits.C1IP = 0b111;  //優先度7
-
-
-
-    /*
-正常に受信したメッセージを受信バッファ ( メッセージ バッファ0 ~ 31) の 1 つに読み込むと、
-モジュールが CiRXFULm レジスタ内の RXFULn ビットをセットした後に、受信バッファ割り 込み (CiINTF<1>) が生成されます。
-ICODE<6:0> ビット (CiVEC<6:0>) は、どのバッファが割 り込みを生成したのかを示します。割り込みサービスルーチン (ISR) 内で
-RBIF ビットをクリアする事により、受信バッファ割り込みをクリアする必要があります。*/
-
+    IPC8bits.C1IP = 0b110;  //優先度6
 
 }
 
@@ -211,9 +207,11 @@ void __attribute__(( interrupt, auto_psv)) _C1Interrupt(void)
     {
 
         if(C1RXFUL1bits.RXFUL10 == 1){
+                checkRXCounter++;
                 exchangeOrderData();
-                ecan1txmsgBuf[0][3] = (unsigned int)order.Mot3OrderVel;
-                C1TR01CONbits.TXREQ0 = 1;
+//                ecan1txmsgBuf[0][3] = (unsigned int)checkRXCounter;
+//                ecan1txmsgBuf[0][4] = (unsigned int)checkRXCounter_last;
+//                C1TR01CONbits.TXREQ0 = 1;
                 C1RXFUL1bits.RXFUL10 = 0;
         }
         C1INTFbits.RBIF = 0;
@@ -225,4 +223,62 @@ void exchangeOrderData(void)
 {
     //もう少し汎用的にしたい
     memcpy(&order,&ecan1rxmsgBuf[1][3],sizeof(order));
+}
+
+signed short getOrder(void)
+{
+#ifdef MotNum_0
+    return order.Mot0OrderVel;
+#endif
+#ifdef MotNum_1
+    return order.Mot1OrderVel;
+#endif
+#ifdef MotNum_2
+    return order.Mot2OrderVel;
+#endif
+#ifdef MotNum_3
+    return order.Mot3OrderVel;
+#endif
+
+    return 0;
+}
+
+void initTimer1(void)
+{
+    T1CON = 0;              // Timer reset
+    IFS0bits.T1IF = 0;      // Reset Timer1 interrupt flag
+    IPC0bits.T1IP = 0b111;  //優先度7
+    IEC0bits.T1IE = 1;      // Enable Timer1 interrupt
+    TMR1 = 0x0000;
+    PR1 = 0x3FF;           // Timer1 period register = ?????
+    T1CONbits.TCKPS = 2;    // 1:64
+    T1CONbits.TON = 1;      // Enable Timer1 and start the counter
+    /*Timer 50msec*/
+}
+
+void __attribute__ ( (interrupt, no_auto_psv) ) _T1Interrupt( void )
+{
+    IFS0bits.T1IF = 0;
+    T1CONbits.TON = 0;
+    
+    count ++;
+    if(count > 100){
+        /*50msecに一回CANを受信しているか確認する*/
+        if(checkRXCounter != checkRXCounter_last)
+        {
+            LED_CAN_ENABLE = 1;
+        }
+        else if(checkRXCounter == checkRXCounter_last)
+        {
+            LED_CAN_ENABLE = 0;
+        }
+
+        checkRXCounter_last = checkRXCounter;
+        count = 0;
+    }
+
+    TMR1 = 0;
+    T1CONbits.TON = 1;
+
+    /* reset Timer 1 interrupt flag */
 }

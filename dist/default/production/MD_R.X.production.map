@@ -61,21 +61,21 @@ Program Memory  [Origin = 0x200, Length = 0x55ec]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xe8           0x15c  (348)
-.text                        0x2e8               0x278           0x3b4  (948)
-.dinit                       0x560                0x14            0x1e  (30)
+.text                        0x2e8               0x2d8           0x444  (1092)
+.dinit                       0x5c0                0x14            0x1e  (30)
 
-                     Total program memory used (bytes):          0x52e  (1326) 4%
+                     Total program memory used (bytes):          0x5be  (1470) 4%
 
 
 Data Memory  [Origin = 0x1000, Length = 0x1000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_0x131a73058d7b10a          0x1000                   0            0xa0  (160)
-_0x131a78c58d7b10a          0x10a0                   0            0xa0  (160)
-.nbss                       0x1140                   0             0x8  (8)
+_0x14fa73058d7c719          0x1000                   0            0xa0  (160)
+_0x14fa78c58d7c719          0x10a0                   0            0xa0  (160)
+.nbss                       0x1140                   0             0xe  (14)
 
-                        Total data memory used (bytes):          0x148  (328) 8%
+                        Total data memory used (bytes):          0x14e  (334) 8%
 
 
 Dynamic Memory Usage
@@ -83,9 +83,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x1148                               0xeb8  (3768)
+stack                       0x114e                               0xeb2  (3762)
 
-                        Maximum dynamic memory (bytes):          0xeb8  (3768)
+                        Maximum dynamic memory (bytes):          0xeb2  (3762)
 
 
 External Symbols in Data Memory (by address):
@@ -109,34 +109,38 @@ External Symbols in Program Memory (by address):
                   0x0002d2                  __DefaultInterrupt
                   0x0002d6                  _memcpy
                   0x0002e8                  _initCAN
-                  0x0003ac                  _initDMA
-                  0x000412                  _initCANFilter
-                  0x000448                  _initCANINT
-                  0x000464                  __C1Interrupt
+                  0x0003ae                  _initDMA
+                  0x000414                  _initCANFilter
+                  0x00044a                  _initCANINT
+                  0x000466                  __C1Interrupt
                   0x0004aa                  _exchangeOrderData
-                  0x0004ba                  _main
-                  0x0004e2                  _init
-                  0x000548                  _testOutPUT
-                  0x000554                  _testOutPUT1
+                  0x0004ba                  _getOrder
+                  0x0004c6                  _initTimer1
+                  0x0004f0                  __T1Interrupt
+                  0x00053e                  _main
+                  0x000550                  _init
+                  0x0005b6                  _MotNumOutLED
 
 External Symbols in Program Memory (by name):
 
-                  0x000464                  __C1Interrupt
+                  0x0005b6                  _MotNumOutLED
+                  0x000466                  __C1Interrupt
                   0x0002d2                  __DefaultInterrupt
+                  0x0004f0                  __T1Interrupt
                   0x000238                  __data_init
                   0x000238                  __data_init_extended
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
                   0x0004aa                  _exchangeOrderData
-                  0x0004e2                  _init
+                  0x0004ba                  _getOrder
+                  0x000550                  _init
                   0x0002e8                  _initCAN
-                  0x000412                  _initCANFilter
-                  0x000448                  _initCANINT
-                  0x0003ac                  _initDMA
-                  0x0004ba                  _main
+                  0x000414                  _initCANFilter
+                  0x00044a                  _initCANINT
+                  0x0003ae                  _initDMA
+                  0x0004c6                  _initTimer1
+                  0x00053e                  _main
                   0x0002d6                  _memcpy
-                  0x000548                  _testOutPUT
-                  0x000554                  _testOutPUT1
 
 Memory Configuration
 
@@ -244,31 +248,31 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x310a
+.debug_info       0x000000       0x3666
  *(.debug_info)
- .debug_info      0x000000        0xcfa build/default/production/main.o
- .debug_info      0x000cfa       0x2410 build/default/production/config_can.o
+ .debug_info      0x000000        0xaf1 build/default/production/main.o
+ .debug_info      0x000af1       0x2b75 build/default/production/config_can.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x220
+.debug_abbrev     0x000000        0x29b
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xe9 build/default/production/main.o
- .debug_abbrev    0x0000e9        0x137 build/default/production/config_can.o
+ .debug_abbrev    0x000000         0xf8 build/default/production/main.o
+ .debug_abbrev    0x0000f8        0x1a3 build/default/production/config_can.o
 
-.debug_line       0x000000        0x5d7
+.debug_line       0x000000        0x669
  *(.debug_line)
- .debug_line      0x000000        0x1f4 build/default/production/main.o
- .debug_line      0x0001f4        0x3e3 build/default/production/config_can.o
+ .debug_line      0x000000        0x18a build/default/production/main.o
+ .debug_line      0x00018a        0x4df build/default/production/config_can.o
 
-.debug_frame      0x000000         0xc8
+.debug_frame      0x000000         0xe8
  *(.debug_frame)
- .debug_frame     0x000000         0x54 build/default/production/main.o
- .debug_frame     0x000054         0x74 build/default/production/config_can.o
+ .debug_frame     0x000000         0x44 build/default/production/main.o
+ .debug_frame     0x000044         0xa4 build/default/production/config_can.o
 
-.debug_str        0x000000        0x19a
+.debug_str        0x000000        0x1ba
  *(.debug_str)
- .debug_str       0x000000         0x4c build/default/production/main.o
- .debug_str       0x00004c        0x14e build/default/production/config_can.o
+ .debug_str       0x000000         0x3e build/default/production/main.o
+ .debug_str       0x00003e        0x17c build/default/production/config_can.o
 
 .debug_loc
  *(.debug_loc)
@@ -277,12 +281,12 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xe3
+                  0x000000        0x102
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x43 build/default/production/main.o
+                  0x000000         0x35 build/default/production/main.o
  .debug_pubnames
-                  0x000043         0xa0 build/default/production/config_can.o
+                  0x000035         0xcd build/default/production/config_can.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -306,7 +310,7 @@ __FUID3
                   0x000014          0x4 LONG 0x2d2 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x2d2 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x2d2 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x2d2 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x4f0 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x2d2 DEFINED (__DMA0Interrupt)?ABSOLUTE (__DMA0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x2d2 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x2d2 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -338,7 +342,7 @@ __FUID3
                   0x000054          0x4 LONG 0x2d2 DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000056          0x4 LONG 0x2d2 DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000058          0x4 LONG 0x2d2 DEFINED (__C1RxRdyInterrupt)?ABSOLUTE (__C1RxRdyInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00005a          0x4 LONG 0x464 DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00005a          0x4 LONG 0x466 DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00005c          0x4 LONG 0x2d2 DEFINED (__DMA3Interrupt)?ABSOLUTE (__DMA3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00005e          0x4 LONG 0x2d2 DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000060          0x4 LONG 0x2d2 DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1756,39 +1760,39 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000030        0x3d6
+                  0x000030        0x442
  .debug_pubtypes
-                  0x000030         0xf7 build/default/production/main.o
+                  0x000030         0xd0 build/default/production/main.o
  .debug_pubtypes
-                  0x000127        0x2df build/default/production/config_can.o
+                  0x000100        0x372 build/default/production/config_can.o
 
 __c30_signature
-                  0x000406         0x1e
+                  0x000472         0x1e
  __c30_signature
-                  0x000406          0x6 build/default/production/main.o
+                  0x000472          0x6 build/default/production/main.o
  __c30_signature
-                  0x00040c          0x6 build/default/production/config_can.o
+                  0x000478          0x6 build/default/production/config_can.o
  __c30_signature
-                  0x000412          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(crt0_extendedep.o)
+                  0x00047e          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(crt0_extendedep.o)
  __c30_signature
-                  0x000418          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(data_init_extendedep.o)
+                  0x000484          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(data_init_extendedep.o)
  __c30_signature
-                  0x00041e          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libc-elf.a(memcpy.epeo)
+                  0x00048a          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libc-elf.a(memcpy.epeo)
 
-_0x131a73058d7b10a
+_0x14fa73058d7c719
                     0x1000         0xa0
- _0x131a73058d7b10a
+ _0x14fa73058d7c719
                     0x1000         0xa0 build/default/production/config_can.o
                     0x1000                  _ecan1txmsgBuf
 
-_0x131a78c58d7b10a
+_0x14fa78c58d7c719
                     0x10a0         0xa0
- _0x131a78c58d7b10a
+ _0x14fa78c58d7c719
                     0x10a0         0xa0 build/default/production/config_can.o
                     0x10a0                  _ecan1rxmsgBuf
 
-.nbss               0x1140          0x8
- .nbss              0x1140          0x8 build/default/production/config_can.o
+.nbss               0x1140          0xe
+ .nbss              0x1140          0xe build/default/production/config_can.o
                     0x1140                  _order
 
 .config_GCP       0x0057fa          0x2
@@ -1812,19 +1816,21 @@ _0x131a78c58d7b10a
  .config_JTAGEN
                   0x0057f0          0x2 build/default/production/main.o
 
-.text             0x0002e8        0x278
- .text            0x0002e8        0x1d2 build/default/production/config_can.o
+.text             0x0002e8        0x2d8
+ .text            0x0002e8        0x256 build/default/production/config_can.o
                   0x0002e8                  _initCAN
-                  0x0003ac                  _initDMA
-                  0x000412                  _initCANFilter
-                  0x000448                  _initCANINT
-                  0x000464                  __C1Interrupt
+                  0x0003ae                  _initDMA
+                  0x000414                  _initCANFilter
+                  0x00044a                  _initCANINT
+                  0x000466                  __C1Interrupt
                   0x0004aa                  _exchangeOrderData
- .text            0x0004ba         0xa6 build/default/production/main.o
-                  0x0004ba                  _main
-                  0x0004e2                  _init
-                  0x000548                  _testOutPUT
-                  0x000554                  _testOutPUT1
+                  0x0004ba                  _getOrder
+                  0x0004c6                  _initTimer1
+                  0x0004f0                  __T1Interrupt
+ .text            0x00053e         0x82 build/default/production/main.o
+                  0x00053e                  _main
+                  0x000550                  _init
+                  0x0005b6                  _MotNumOutLED
 
-.dinit            0x000560         0x14
- .dinit           0x000560         0x14 data_init
+.dinit            0x0005c0         0x14
+ .dinit           0x0005c0         0x14 data_init

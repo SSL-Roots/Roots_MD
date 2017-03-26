@@ -16,26 +16,26 @@
 
 /*  関数    */
 void init(void);
-void testOutPUT(void);
-void testOutPUT1(void);
+void MotNumOutLED(void);
 
 int main(int argc, char** argv)
 {
-   
+    signed short order;
     
     init();
-
-    testOutPUT1();
+    MotNumOutLED();
 
 
     while(1)
     {
-        while(C1TR01CONbits.TXREQ0 == 1){
-            LED1 = 1;
-            LED2 = 1;
-            LED3 = 1;
-            if(C1TR01CONbits.TXERR0 == 1)C1TR01CONbits.TXREQ0 = 0;
-        }
+        order = getOrder();
+/*            testCANcode                     */
+//        while(C1TR01CONbits.TXREQ0 == 1){
+//            LED1 = 1;
+//            LED2 = 1;
+//            LED3 = 1;
+//            if(C1TR01CONbits.TXERR0 == 1)C1TR01CONbits.TXREQ0 = 0;
+//        }
         
     }
     return (EXIT_SUCCESS);
@@ -90,16 +90,26 @@ void init(void)
     initCAN();
 }
 
-void testOutPUT(void)
+
+void MotNumOutLED(void)
 {
+#ifdef MotNum_0
+    LED1 = 0;
+    LED2 = 0;
+
+#elif MotNum_1
+    LED1 = 0;
+    LED2 = 1;
+
+#elif MotNum_2
     LED1 = 1;
     LED2 = 0;
-    LED3 = 1;
-}
 
-void testOutPUT1(void)
-{
+#elif MotNum_3
     LED1 = 1;
     LED2 = 1;
-    LED3 = 0;
+
+#else
+
+#endif
 }

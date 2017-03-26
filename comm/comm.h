@@ -12,9 +12,12 @@
 
 #define FCY 39613750
 
-#define LED1 _LATA1
-#define LED2 _LATA2
-#define LED3 _LATA3
+
+#define LED1 _LATA2
+#define LED2 _LATA3
+
+
+
 
 
 

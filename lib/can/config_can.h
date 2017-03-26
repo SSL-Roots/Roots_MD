@@ -5,16 +5,20 @@
  * Created on 2017/03/26, 19:23
  */
 
-//#ifndef CONFIG_CAN_H
-//#define	CONFIG_CAN_H
+#define LED_CAN_ENABLE _LATA1
 
+/*対象のMotNum以外をコメントアウトする*/
+#define MotNum_0
+//#define MotNum_1
+//#define MotNum_2
+//#define MotNum_3
 
 /* 受信データ置換後*/
 typedef struct {
+    signed short Mot0OrderVel;
     signed short Mot1OrderVel;
     signed short Mot2OrderVel;
     signed short Mot3OrderVel;
-    signed short Mot4OrderVel;
 } OrderMotVel;
 
 /*  変数    */
@@ -22,9 +26,7 @@ extern OrderMotVel order;
 
 /*  関数    */
 extern void initCAN(void);
-
-
-
+extern signed short getOrder(void);
 
 
 #define NUM_OF_ECAN_BUFFERS 32
@@ -95,5 +97,4 @@ extern void initCAN(void);
 
 
 
-//#endif	/* CONFIG_CAN_H */
 
