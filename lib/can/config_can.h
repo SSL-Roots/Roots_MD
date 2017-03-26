@@ -5,8 +5,8 @@
  * Created on 2017/03/26, 19:23
  */
 
-#ifndef CONFIG_CAN_H
-#define	CONFIG_CAN_H
+//#ifndef CONFIG_CAN_H
+//#define	CONFIG_CAN_H
 
 
 /* 受信データ置換後*/
@@ -17,9 +17,15 @@ typedef struct {
     signed short Mot4OrderVel;
 } OrderMotVel;
 
-OrderMotVel order;
+/*  変数    */
+extern OrderMotVel order;
 
-/* CAN関係 */
+/*  関数    */
+extern void initCAN(void);
+
+
+
+
 
 #define NUM_OF_ECAN_BUFFERS 32
 
@@ -89,5 +95,5 @@ OrderMotVel order;
 
 
 
-#endif	/* CONFIG_CAN_H */
+//#endif	/* CONFIG_CAN_H */
 

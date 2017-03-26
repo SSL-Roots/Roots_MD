@@ -22,6 +22,7 @@ Command:
   -L/Applications/microchip/xc16/v1.22/bin/bin/../../lib/dsPIC33F \
   -L/Applications/microchip/xc16/v1.22/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/main.o \
+  build/default/production/config_can.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   -Tp33EP32MC502.gld.00 \
@@ -52,7 +53,7 @@ Archive member included because of file (symbol)
 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(data_init_extendedep.o)
                               /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(crt0_extendedep.o) (__data_init_extended)
 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libc-elf.a(memcpy.epeo)
-                              build/default/production/main.o (_memcpy)
+                              build/default/production/config_can.o (_memcpy)
 
 
 Program Memory  [Origin = 0x200, Length = 0x55ec]
@@ -70,8 +71,8 @@ Data Memory  [Origin = 0x1000, Length = 0x1000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_0x1cfa6d458d79ab0          0x1000                   0            0xa0  (160)
-_0x1cfa73058d79ab0          0x10a0                   0            0xa0  (160)
+_0x1bfa73058d7b02a          0x1000                   0            0xa0  (160)
+_0x1bfa78c58d7b02a          0x10a0                   0            0xa0  (160)
 .nbss                       0x1140                   0             0x8  (8)
 
                         Total data memory used (bytes):          0x148  (328) 8%
@@ -103,39 +104,39 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00022c                  __psv_init
-                  0x000238                  __data_init_extended
                   0x000238                  __data_init
+                  0x000238                  __data_init_extended
                   0x0002d2                  __DefaultInterrupt
                   0x0002d6                  _memcpy
-                  0x0002e8                  _main
-                  0x000310                  _initCAN
-                  0x0003b6                  _initDMA
-                  0x00041c                  _initCANFilter
-                  0x000452                  _initCANINT
-                  0x00046e                  _init
-                  0x0004f2                  _testOutPUT
-                  0x0004fe                  _testOutPUT1
-                  0x00050a                  __C1Interrupt
-                  0x000550                  _exchangeOrderData
+                  0x0002e8                  _initCAN
+                  0x0003ac                  _initDMA
+                  0x000412                  _initCANFilter
+                  0x000448                  _initCANINT
+                  0x000464                  __C1Interrupt
+                  0x0004aa                  _exchangeOrderData
+                  0x0004ba                  _main
+                  0x0004e2                  _init
+                  0x000548                  _testOutPUT
+                  0x000554                  _testOutPUT1
 
 External Symbols in Program Memory (by name):
 
-                  0x00050a                  __C1Interrupt
+                  0x000464                  __C1Interrupt
                   0x0002d2                  __DefaultInterrupt
                   0x000238                  __data_init
                   0x000238                  __data_init_extended
                   0x00022c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000550                  _exchangeOrderData
-                  0x00046e                  _init
-                  0x000310                  _initCAN
-                  0x00041c                  _initCANFilter
-                  0x000452                  _initCANINT
-                  0x0003b6                  _initDMA
-                  0x0002e8                  _main
+                  0x0004aa                  _exchangeOrderData
+                  0x0004e2                  _init
+                  0x0002e8                  _initCAN
+                  0x000412                  _initCANFilter
+                  0x000448                  _initCANINT
+                  0x0003ac                  _initDMA
+                  0x0004ba                  _main
                   0x0002d6                  _memcpy
-                  0x0004f2                  _testOutPUT
-                  0x0004fe                  _testOutPUT1
+                  0x000548                  _testOutPUT
+                  0x000554                  _testOutPUT1
 
 Memory Configuration
 
@@ -159,6 +160,7 @@ FUID3            0x800ffe           0x000002
 Linker script and memory map
 
 LOAD build/default/production/main.o
+LOAD build/default/production/config_can.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD /Applications/microchip/xc16/v1.22/bin/bin/../../lib/dsPIC33E/libp33EP32MC502-elf.a
                     0x57f0                  __FICD = 0x57f0
@@ -242,26 +244,31 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x2dca
+.debug_info       0x000000       0x310a
  *(.debug_info)
- .debug_info      0x000000       0x2dca build/default/production/main.o
+ .debug_info      0x000000        0xcfa build/default/production/main.o
+ .debug_info      0x000cfa       0x2410 build/default/production/config_can.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x17d
+.debug_abbrev     0x000000        0x220
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x17d build/default/production/main.o
+ .debug_abbrev    0x000000         0xe9 build/default/production/main.o
+ .debug_abbrev    0x0000e9        0x137 build/default/production/config_can.o
 
-.debug_line       0x000000        0x563
+.debug_line       0x000000        0x5d7
  *(.debug_line)
- .debug_line      0x000000        0x563 build/default/production/main.o
+ .debug_line      0x000000        0x1f4 build/default/production/main.o
+ .debug_line      0x0001f4        0x3e3 build/default/production/config_can.o
 
-.debug_frame      0x000000         0xb4
+.debug_frame      0x000000         0xc8
  *(.debug_frame)
- .debug_frame     0x000000         0xb4 build/default/production/main.o
+ .debug_frame     0x000000         0x54 build/default/production/main.o
+ .debug_frame     0x000054         0x74 build/default/production/config_can.o
 
-.debug_str        0x000000        0x18c
+.debug_str        0x000000        0x19a
  *(.debug_str)
- .debug_str       0x000000        0x18c build/default/production/main.o
+ .debug_str       0x000000         0x4c build/default/production/main.o
+ .debug_str       0x00004c        0x14e build/default/production/config_can.o
 
 .debug_loc
  *(.debug_loc)
@@ -270,18 +277,22 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0xd1
+                  0x000000         0xe3
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xd1 build/default/production/main.o
+                  0x000000         0x43 build/default/production/main.o
+ .debug_pubnames
+                  0x000043         0xa0 build/default/production/config_can.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x18
+.debug_aranges    0x000000         0x30
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/production/main.o
+ .debug_aranges
+                  0x000018         0x18 build/default/production/config_can.o
 
 .ivt              0x000004        0x13e
                   0x000004          0x4 LONG 0x2d2 DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
@@ -327,7 +338,7 @@ __FUID3
                   0x000054          0x4 LONG 0x2d2 DEFINED (__SPI2ErrInterrupt)?ABSOLUTE (__SPI2ErrInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000056          0x4 LONG 0x2d2 DEFINED (__SPI2Interrupt)?ABSOLUTE (__SPI2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000058          0x4 LONG 0x2d2 DEFINED (__C1RxRdyInterrupt)?ABSOLUTE (__C1RxRdyInterrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00005a          0x4 LONG 0x50a DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00005a          0x4 LONG 0x464 DEFINED (__C1Interrupt)?ABSOLUTE (__C1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00005c          0x4 LONG 0x2d2 DEFINED (__DMA3Interrupt)?ABSOLUTE (__DMA3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00005e          0x4 LONG 0x2d2 DEFINED (__IC3Interrupt)?ABSOLUTE (__IC3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000060          0x4 LONG 0x2d2 DEFINED (__IC4Interrupt)?ABSOLUTE (__IC4Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1745,35 +1756,39 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000018        0x39d
+                  0x000030        0x3d6
  .debug_pubtypes
-                  0x000018        0x39d build/default/production/main.o
+                  0x000030         0xf7 build/default/production/main.o
+ .debug_pubtypes
+                  0x000127        0x2df build/default/production/config_can.o
 
 __c30_signature
-                  0x0003b6         0x18
+                  0x000406         0x1e
  __c30_signature
-                  0x0003b6          0x6 build/default/production/main.o
+                  0x000406          0x6 build/default/production/main.o
  __c30_signature
-                  0x0003bc          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(crt0_extendedep.o)
+                  0x00040c          0x6 build/default/production/config_can.o
  __c30_signature
-                  0x0003c2          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(data_init_extendedep.o)
+                  0x000412          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(crt0_extendedep.o)
  __c30_signature
-                  0x0003c8          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libc-elf.a(memcpy.epeo)
+                  0x000418          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libpic30-elf.a(data_init_extendedep.o)
+ __c30_signature
+                  0x00041e          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libc-elf.a(memcpy.epeo)
 
-_0x1cfa6d458d79ab0
+_0x1bfa73058d7b02a
                     0x1000         0xa0
- _0x1cfa6d458d79ab0
-                    0x1000         0xa0 build/default/production/main.o
+ _0x1bfa73058d7b02a
+                    0x1000         0xa0 build/default/production/config_can.o
                     0x1000                  _ecan1txmsgBuf
 
-_0x1cfa73058d79ab0
+_0x1bfa78c58d7b02a
                     0x10a0         0xa0
- _0x1cfa73058d79ab0
-                    0x10a0         0xa0 build/default/production/main.o
+ _0x1bfa78c58d7b02a
+                    0x10a0         0xa0 build/default/production/config_can.o
                     0x10a0                  _ecan1rxmsgBuf
 
 .nbss               0x1140          0x8
- .nbss              0x1140          0x8 build/default/production/main.o
+ .nbss              0x1140          0x8 build/default/production/config_can.o
                     0x1140                  _order
 
 .config_GCP       0x0057fa          0x2
@@ -1798,17 +1813,18 @@ _0x1cfa73058d79ab0
                   0x0057f0          0x2 build/default/production/main.o
 
 .text             0x0002e8        0x278
- .text            0x0002e8        0x278 build/default/production/main.o
-                  0x0002e8                  _main
-                  0x000310                  _initCAN
-                  0x0003b6                  _initDMA
-                  0x00041c                  _initCANFilter
-                  0x000452                  _initCANINT
-                  0x00046e                  _init
-                  0x0004f2                  _testOutPUT
-                  0x0004fe                  _testOutPUT1
-                  0x00050a                  __C1Interrupt
-                  0x000550                  _exchangeOrderData
+ .text            0x0002e8        0x1d2 build/default/production/config_can.o
+                  0x0002e8                  _initCAN
+                  0x0003ac                  _initDMA
+                  0x000412                  _initCANFilter
+                  0x000448                  _initCANINT
+                  0x000464                  __C1Interrupt
+                  0x0004aa                  _exchangeOrderData
+ .text            0x0004ba         0xa6 build/default/production/main.o
+                  0x0004ba                  _main
+                  0x0004e2                  _init
+                  0x000548                  _testOutPUT
+                  0x000554                  _testOutPUT1
 
 .dinit            0x000560         0x14
  .dinit           0x000560         0x14 data_init
