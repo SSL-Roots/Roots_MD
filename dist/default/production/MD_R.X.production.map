@@ -71,8 +71,8 @@ Data Memory  [Origin = 0x1000, Length = 0x1000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_0x1bfa73058d7b02a          0x1000                   0            0xa0  (160)
-_0x1bfa78c58d7b02a          0x10a0                   0            0xa0  (160)
+_0x131a73058d7b10a          0x1000                   0            0xa0  (160)
+_0x131a78c58d7b10a          0x10a0                   0            0xa0  (160)
 .nbss                       0x1140                   0             0x8  (8)
 
                         Total data memory used (bytes):          0x148  (328) 8%
@@ -1775,15 +1775,15 @@ __c30_signature
  __c30_signature
                   0x00041e          0x6 /Applications/microchip/xc16/v1.22/bin/bin/../../lib/libc-elf.a(memcpy.epeo)
 
-_0x1bfa73058d7b02a
+_0x131a73058d7b10a
                     0x1000         0xa0
- _0x1bfa73058d7b02a
+ _0x131a73058d7b10a
                     0x1000         0xa0 build/default/production/config_can.o
                     0x1000                  _ecan1txmsgBuf
 
-_0x1bfa78c58d7b02a
+_0x131a78c58d7b10a
                     0x10a0         0xa0
- _0x1bfa78c58d7b02a
+ _0x131a78c58d7b10a
                     0x10a0         0xa0 build/default/production/config_can.o
                     0x10a0                  _ecan1rxmsgBuf
 
