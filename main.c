@@ -51,7 +51,11 @@ void init(void)
 
 
     //FRC Oscillator Tuning
+#ifdef STM32
+    _TUN        = 0b011110;    //FRC = 7.37MHz nominal(0b000000) 7.474MHz(0b011110)
+#elif LPC4088
     _TUN        = 0b000000;    //FRC = 7.37MHz nominal(0b000000) 7.474MHz(0b011110)
+#endif
     // FRCDIV (default = 1　PostScaler)
     // PostScaler = 1: FIN = 7.37MHz
     //FPLLO = FIN * M/(N1*N2)
@@ -63,8 +67,11 @@ void init(void)
     //120MHz < Fcvo < 340MHz
     _PLLPOST    = 0;
     _PLLPRE     = 0;
+#ifdef STM32
+    _PLLDIV     = 41;
+#elif LPC4088
     _PLLDIV     = 42;
-
+#endif
     
     while(!OSCCONbits.LOCK);
 

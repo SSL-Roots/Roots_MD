@@ -16,7 +16,8 @@
 #define LED1 _LATA2
 #define LED2 _LATA3
 
-
+//#define LPC4088
+#define STM32
 
 
 

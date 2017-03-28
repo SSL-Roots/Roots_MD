@@ -209,9 +209,9 @@ void __attribute__(( interrupt, auto_psv)) _C1Interrupt(void)
         if(C1RXFUL1bits.RXFUL10 == 1){
                 checkRXCounter++;
                 exchangeOrderData();
-//                ecan1txmsgBuf[0][3] = (unsigned int)checkRXCounter;
-//                ecan1txmsgBuf[0][4] = (unsigned int)checkRXCounter_last;
-//                C1TR01CONbits.TXREQ0 = 1;
+                ecan1txmsgBuf[0][3] = (unsigned int)checkRXCounter;
+                ecan1txmsgBuf[0][4] = (unsigned int)checkRXCounter_last;
+                C1TR01CONbits.TXREQ0 = 1;
                 C1RXFUL1bits.RXFUL10 = 0;
         }
         C1INTFbits.RBIF = 0;
